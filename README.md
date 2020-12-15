@@ -22,6 +22,20 @@
 
 ### Usage
 
+
+```
+module "ecr" {
+  source  = "mrexojo/ecr/aws"
+  version = "0.0.1"
+  # insert the 3 required variables here
+}
+```
+
+
+or
+
+
+
 ```
 module "terraform-module-ecr" {
   source    = "git::ssh://git@github.com/mrexojo/terraform-aws-ecr?ref=v0.0.1"
