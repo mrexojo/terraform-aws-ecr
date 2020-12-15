@@ -5,6 +5,7 @@
 
  Requirement variables:
 
+
 - ecr_repo : Name of repository to create
 - mantainer: mantainer operator
 - project: Name or code project
@@ -13,9 +14,11 @@
 
  Default parameters (not required to set):
 
+
 - scan_on_push: Scan image on push before ecr upload (default true)
 - expire_days: Expire images older than X days (default 3)
 - keep_days: Keep last X images (default 10)
+
 
 ### Usage
 
@@ -27,5 +30,6 @@ module "terraform-module-ecr" {
   project   = var.env_project
 }
 ````
-note: This module assume that you has configured aws and region properly
+
+- note: This module assume that you has configured aws and region properly
 
