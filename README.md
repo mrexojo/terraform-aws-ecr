@@ -3,13 +3,13 @@
 ### Terraform module to create AWS ECR with customized policy
 
 
-#### Requirement variables:
+### Requirement variables:
 
 - ecr_repo : Name of repository to create
 - mantainer: mantainer operator
 - project: Name or code project
 
-#### Default parameters (not required to set):
+### Default parameters (not required to set):
 
 - scan_on_push: Scan image on push before ecr upload (default true)
 - expire_days: Expire images older than X days (default 3)
