@@ -2,7 +2,7 @@
     "rules": [
         {
             "rulePriority": 1,
-            "description": "Expire older images",
+            "description": "Expire untagged images",
             "selection": {
                 "tagStatus": "untagged",
                 "countType": "sinceImagePushed",
@@ -13,12 +13,12 @@
                 "type": "expire"
             }
         },
-		{
+        {
             "rulePriority": 2,
-            "description": "Keep last images",
+            "description": "Keep only recent tagged images",
             "selection": {
                 "tagStatus": "tagged",
-                "tagPrefixList": ["v","b-"],
+                "tagPrefixList": ["v", "latest", "release-", "b-"],
                 "countType": "imageCountMoreThan",
                 "countNumber": ${keep}
             },

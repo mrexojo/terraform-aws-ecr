@@ -1,10 +1,12 @@
 {
-    "Version": "2008-10-17",
+    "Version": "2012-10-17",
     "Statement": [
         {
             "Sid": "${sid_name} ECR Policy",
             "Effect": "Allow",
-            "Principal": "*",
+            "Principal": {
+                "AWS": ${account_ids}
+            },
             "Action": [
                 "ecr:GetDownloadUrlForLayer",
                 "ecr:BatchGetImage",
@@ -15,11 +17,7 @@
                 "ecr:CompleteLayerUpload",
                 "ecr:DescribeRepositories",
                 "ecr:GetRepositoryPolicy",
-                "ecr:ListImages",
-                "ecr:DeleteRepository",
-                "ecr:BatchDeleteImage",
-                "ecr:SetRepositoryPolicy",
-                "ecr:DeleteRepositoryPolicy"
+                "ecr:ListImages"
             ]
         }
     ]
