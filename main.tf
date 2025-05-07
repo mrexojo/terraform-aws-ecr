@@ -11,19 +11,19 @@
 
 resource "aws_ecr_repository" "ecr-repository" {
   name = var.ecr_repo
-  
+
   image_scanning_configuration {
     scan_on_push = var.scan_on_push
   }
-  
+
   encryption_configuration {
     encryption_type = var.encryption_type
     kms_key         = var.encryption_type == "KMS" ? var.kms_key_id : null
   }
-  
+
   # Opcionalmente evita que las imágenes etiquetadas puedan sobrescribirse
   image_tag_mutability = var.image_tag_mutability
-  
+
   tags = {
     Name        = var.ecr_repo
     Maintainer  = var.mantainer
@@ -36,8 +36,8 @@ resource "aws_ecr_repository" "ecr-repository" {
 
 resource "aws_ecr_repository_policy" "ecr-repository-policy" {
   repository = aws_ecr_repository.ecr-repository.name
-  policy     = var.use_custom_policy ? var.custom_policy : templatefile("${path.module}/policy.json.tpl", { 
-    sid_name = var.ecr_repo,
+  policy = var.use_custom_policy ? var.custom_policy : templatefile("${path.module}/policy.json.tpl", {
+    sid_name    = var.ecr_repo,
     account_ids = jsonencode(var.allowed_account_ids)
   })
 }
@@ -53,7 +53,7 @@ resource "aws_ecr_lifecycle_policy" "ecr-lifecycle-policy" {
 # Configuración de replicación (opcional)
 resource "aws_ecr_replication_configuration" "replication" {
   count = var.enable_replication ? 1 : 0
-  
+
   replication_configuration {
     rule {
       dynamic "destination" {
@@ -70,7 +70,7 @@ resource "aws_ecr_replication_configuration" "replication" {
 # Pull Through Cache Rule (opcional)
 resource "aws_ecr_pull_through_cache_rule" "pull_through" {
   count = var.create_pull_through_cache ? 1 : 0
-  
+
   ecr_repository_prefix = var.pull_through_cache_prefix
   upstream_registry_url = var.upstream_registry_url
 }
